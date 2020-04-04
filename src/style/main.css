@@ -1,0 +1,210 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Light"), local("OpenSans-Light"), url("../fonts/opensans/opensanslight.woff2") format("woff2"), url("../fonts/opensans/opensanslight.woff") format("woff"), url("../fonts/opensans/opensanslight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Light Italic"), local("OpenSansLight-Italic"), url("../fonts/opensans/opensanslightitalic.woff2") format("woff2"), url("../fonts/opensans/opensanslightitalic.woff") format("woff"), url("../fonts/opensans/opensanslightitalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans"), local("OpenSans"), url("../fonts/opensans/opensans.woff2") format("woff2"), url("../fonts/opensans/opensans.woff") format("woff"), url("../fonts/opensans/opensans.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Italic"), local("OpenSans-Italic"), url("../fonts/opensans/opensansitalic.woff2") format("woff2"), url("../fonts/opensans/opensansitalic.woff") format("woff"), url("../fonts/opensans/opensansitalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Semibold"), local("OpenSans-Semibold"), url("../fonts/opensans/opensanssemibold.woff2") format("woff2"), url("../fonts/opensans/opensanssemibold.woff") format("woff"), url("../fonts/opensans/opensanssemibold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Semibold Italic"), local("OpenSans-SemiboldItalic"), url("../fonts/opensans/opensanssemibolditalic.woff2") format("woff2"), url("../fonts/opensans/opensanssemibolditalic.woff") format("woff"), url("../fonts/opensans/opensanssemibolditalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Bold"), local("OpenSans-Bold"), url("../fonts/opensans/opensansbold.woff2") format("woff2"), url("../fonts/opensans/opensansbold.woff") format("woff"), url("../fonts/opensans/opensansbold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Bold Italic"), local("OpenSans-BoldItalic"), url("../fonts/opensans/opensansbolditalic.woff2") format("woff2"), url("../fonts/opensans/opensansbolditalic.woff") format("woff"), url("../fonts/opensans/opensansbolditalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Extrabold"), local("OpenSans-Extrabold"), url("../fonts/opensans/opensansextrabold.woff2") format("woff2"), url("../fonts/opensans/opensansextrabold.woff") format("woff"), url("../fonts/opensans/opensansextrabold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  src: local("Open Sans Extrabold Italic"), local("OpenSans-ExtraboldItalic"), url("../fonts/opensans/opensansextrabolditalic.woff2") format("woff2"), url("../fonts/opensans/opensansextrabolditalic.woff") format("woff"), url("../fonts/opensans/opensansextrabolditalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+body {
+  font-family: "Open Sans";
+  background-color: #272727;
+  margin: 0;
+}
+
+*:focus {
+  border: none;
+  outline: none;
+}
+
+#canvas {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+audio {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  width: calc(100% - 20px);
+}
+
+#status {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 14px;
+  background-color: #6fbd4b;
+  text-align: center;
+  color: #000;
+  opacity: 0;
+  -webkit-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+  margin-left: -28px;
+  margin-right: -28px;
+  height: 0;
+  -webkit-transition: opacity height .3s ease-in-out;
+  transition: opacity height .3s ease-in-out;
+}
+
+#status.show {
+  opacity: 1;
+  height: auto;
+}
+
+#close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: none;
+  border: none;
+  color: #fff;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  z-index: 3;
+  background-image: url(../img/close.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  display: inline-block;
+  margin: 8px;
+  -webkit-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+}
+
+#close:hover {
+  opacity: .7;
+}
+
+#menu {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#menu #title {
+  padding: 20px 40px;
+  color: #fff;
+  font-size: 26px;
+  width: calc(100% - 200px);
+  text-align: center;
+  margin-top: 100px;
+}
+
+#menu #controlers {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+  border-radius: 50%;
+  height: 150px;
+  width: 150px;
+  background-color: rgba(51, 51, 51, 0.8);
+  margin-bottom: 40px;
+}
+
+#menu #controlers #handler {
+  border: none;
+  width: 100%;
+  border-radius: 50%;
+  background: inherit;
+  color: #fff;
+  cursor: pointer;
+  background-image: url(../img/play-button.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-transition: background-color .3s ease-in-out;
+  transition: background-color .3s ease-in-out;
+}
+
+#menu #controlers #handler:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#menu #controlers #handler.play {
+  background-image: url(../img/stop-button.svg);
+}
+/*# sourceMappingURL=main.css.map */

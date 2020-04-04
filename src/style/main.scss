@@ -1,0 +1,122 @@
+@import "fonts";
+
+body {
+    font-family: $font-default;
+    background-color: #272727;
+    margin: 0;
+}
+
+*:focus {
+    border: none;
+    outline: none;
+}
+
+#canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+audio {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    width: calc(100% - 20px);
+}
+
+#status {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    padding: 14px;
+    background-color: rgb(111, 189, 75);
+    text-align: center;
+    color: #000;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    margin-left: -28px;
+    margin-right: -28px;
+    height: 0;
+    transition: opacity height .3s ease-in-out;
+    &.show {
+        opacity: 1;
+        height: auto;
+    }
+}
+#close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    z-index: 3;
+    background-image: url(../img/close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: inline-block;
+    margin: 8px;
+    transition: opacity .3s ease-in-out;
+
+    &:hover {
+        opacity: .7;
+    }
+}
+
+#menu {
+    height: 100%;
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+    #title {
+        // background-color: rgba(0, 0, 0, .5);
+        padding: 20px 40px;
+        color: #fff;
+        font-size: 26px;
+        width: calc(100% - 200px);
+        text-align: center;
+        margin-top: 100px;
+    }
+
+    #controlers {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        background-color: rgba(51, 51, 51, 0.8);
+        margin-bottom: 40px;
+        #handler {
+            border: none;
+            width: 100%;
+            border-radius: 50%;
+            background: inherit;
+            color: #fff;
+            cursor: pointer;
+            background-image: url(../img/play-button.svg);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: background-color .3s ease-in-out;
+            
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+
+            &.play {
+                background-image: url(../img/stop-button.svg);
+            }
+        }
+    }
+}

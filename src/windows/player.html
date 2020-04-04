@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; media-src *">
+    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="../style/main.css">
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <audio id="audio">
+      <source id="audioSource" src=""></source>
+    </audio>
+
+    <div id="status">загрузка...</div>
+    <button id="close"></button>
+
+    <div id="menu">
+      <div id="title"></div>
+      
+      <div id="controlers">
+        <button id="handler"></button>
+      </div>
+    </div>
+
+    <!-- You can also require other files to run in this process -->
+    <script src="../../renderer.js"></script>
+  </body>
+</html>
