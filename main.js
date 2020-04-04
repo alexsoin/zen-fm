@@ -5,7 +5,7 @@ const axios = require('axios');
 const Store = require('electron-store');
 
 let window;
-const URI = `${__dirname}/src/windows/player.html`;
+const URI_PLAYER = `${__dirname}/src/windows/player.html`;
 const ICON = `${__dirname}/radio.png`;
 const store = new Store();
 const defaultStore = {
@@ -19,13 +19,23 @@ const defaultStore = {
   ]
 };
 
+/** Если данных нет, создаём стандартные значения */
 if(!store.get('fm')) {
   store.set('fm', defaultStore);
-} else {
-  console.log(store.get('fm'));
 }
 
-const activeFM = ({title, url}) => {  
+/**
+ * Активая FM потока
+ * 
+ * @param Number id 
+ */
+const activeFM = (id) => {  
+  const fm = store.get('fm');
+  const list = fm.listFM;
+
+  const {title, url} = list[id];
+  store.set('fm.activeFM', id);
+
   axios.get(url).then((response) => { 
     const dataM3U = response.data;
     const playlist = M3U.parse(dataM3U);
@@ -41,15 +51,16 @@ const activeFM = ({title, url}) => {
 
 }
 
+/** Обработчик включения последней радиостанции */
 ipcMain.on('play-latest', (event, arg) => {
   const fm = store.get('fm');
   const latest = fm.activeFM;
-  const list = fm.listFM;
 
-  activeFM(list[latest]);
-  event.reply('is-load', true);
+  activeFM(latest);
+  event.reply('is-load', true); // меняем статус загрузки
 });
 
+/** Обработчик закрытия окна */
 ipcMain.on('close-window', (event, arg) => { window.hide(); });
 
 /** Toggle window */
@@ -65,7 +76,7 @@ const toggleWindow = () => {
   }
 }
 
-/** Calculate window position */
+/** Расчет позиции окна */
 const getWindowPosition = () => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const windowBounds = window.getBounds();
@@ -77,7 +88,7 @@ const getWindowPosition = () => {
   return {x, y}
 };
 
-/** Create a new window */
+/** Создание окна плеера */
 const createWindow = () => {
   const sizeWindow = { width: 350, height: 450 };
   // const sizeWindow = { width: 1500, height: 650 };
@@ -95,11 +106,10 @@ const createWindow = () => {
     }
   });
 
-  /** Load target webpage */
-  window.loadFile(URI);
-  // window.webContents.openDevTools();  
+  window.loadFile(URI_PLAYER); // загружаем html контент
+  // window.webContents.openDevTools(); // включение девтула
 
-  /** Hide the window when it loses focus */
+  /** Скрываем окно, если курсор вне фокуса */
   window.on('blur', () => {
     if (!window.webContents.isDevToolsOpened()) {
       window.hide();
@@ -107,6 +117,7 @@ const createWindow = () => {
   });
 };
 
+/** Создание менюя трея */
 const createMenuTray = () => {
   const fm = store.get('fm');
   const list = fm.listFM;
@@ -117,10 +128,9 @@ const createMenuTray = () => {
     click: (event) => {
       const fm = store.get('fm');
       const latest = fm.activeFM;
-      const list = fm.listFM;
 
       console.log(event.label)
-      activeFM(list[latest]);
+      activeFM(latest);
     } 
   });
 
@@ -130,11 +140,8 @@ const createMenuTray = () => {
     arrMenu.push({
       label: element.title,
       click: (event) => {
-        const fm = store.get('fm');
-        const list = fm.listFM;
-  
         console.log(event.label)
-        activeFM(list[index]);
+        activeFM(index);
       }
     });
   });
@@ -146,6 +153,7 @@ const createMenuTray = () => {
   return arrMenu;
 }
 
+/** Создаем трей */
 const createTray = () => {
   const menu = createMenuTray();
   tray = new Tray(ICON);

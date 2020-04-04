@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron')
+const { ipcRenderer } = require('electron');
 
 function audioVisual() {
   let audio = document.getElementById("audio");
@@ -55,10 +55,11 @@ function audioVisual() {
   renderFrame();
 }
 
-audioVisual();
+audioVisual(); // добавляем аудио визуализацию
 
+/** Обработка события получения fm радиостанции для включения*/
 ipcRenderer.on('render-fm', (event, arg) => {
-  console.log('station: ', arg)
+  console.log('station: ', arg);
   let title = document.getElementById('title');
   let audio = document.getElementById('audio');
   let source = document.getElementById('audioSource');
@@ -71,6 +72,7 @@ ipcRenderer.on('render-fm', (event, arg) => {
   audio.play();
 });
 
+/** Переключение статуса */
 let handleStatus = (isLoad) => {
   let status = document.getElementById('status');
   if(isLoad) {
@@ -80,16 +82,19 @@ let handleStatus = (isLoad) => {
   }
 }
 
+/** Обработка события загрузки */
 ipcRenderer.on('is-load', (event, arg) => {
   handleStatus(arg)
 });
 
+/** Добавляем на кнопку закрытия событие закрытия окна */
 document.querySelector('#close').addEventListener( 'click', () => { 
   ipcRenderer.send('close-window'); 
 })
 
 let btnHandler = document.querySelector('#handler');
 
+/** Добавление события на кнопку воспроизведения/остановки */
 btnHandler.addEventListener( 'click', (event) => { 
   const playClass = "play";
 
