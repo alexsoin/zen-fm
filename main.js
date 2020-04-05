@@ -6,7 +6,7 @@ const Store = require('electron-store');
 
 let window;
 const URI_PLAYER = `${__dirname}/src/windows/player.html`;
-const ICON = `${__dirname}/radio.png`;
+const ICON = `${__dirname}/icon.ico`;
 const store = new Store();
 const defaultStore = {
   activeFM: 0,
