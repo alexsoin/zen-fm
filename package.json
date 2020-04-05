@@ -17,7 +17,6 @@
     "demo"
   ],
   "author": "Alex Soin <alex94soin@gmail.com>",
-  "license": null,
   "devDependencies": {
     "electron": "^8.2.0",
     "electron-builder": "^22.4.1"
