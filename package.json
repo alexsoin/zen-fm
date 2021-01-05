@@ -22,7 +22,7 @@
     "electron-builder": "^22.4.1"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "electron-store": "^5.1.1",
     "playlist-parser": "0.0.12"
   },
